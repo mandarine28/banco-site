@@ -1,0 +1,150 @@
+/* Design system Banco — repris de src/theme/index.ts */
+:root {
+  --purple: #266de4;
+  --purple-deep: #0c2d64;
+  --cream: #fef6d7;
+  --cream-card: #fef9e6;
+  --cream-title: #fef1cc;
+  --orange: #fb940e;
+  --yellow: #f2c512;
+  --orange-border: #a15c03;
+  --blob: #fbb040;
+  --font: 'M PLUS Rounded 1c', system-ui, -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  font-weight: 500;
+  background: var(--cream);
+  color: var(--purple-deep);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Blobs orange à 6 %, comme HomeBackground */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  z-index: -1;
+  border-radius: 50%;
+  background: var(--blob);
+  opacity: 0.06;
+  width: 480px;
+  height: 360px;
+}
+body::before { top: -120px; right: -160px; transform: rotate(-22deg); }
+body::after { top: 220px; left: -220px; transform: rotate(18deg); }
+
+.page { width: 100%; max-width: 640px; display: flex; flex-direction: column; flex: 1; }
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 16px 32px;
+}
+.logo { width: 180px; height: auto; }
+
+nav { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+nav a {
+  font-weight: 800;
+  font-size: 15px;
+  text-decoration: none;
+  color: var(--purple);
+  padding: 8px 16px;
+  border-radius: 12px;
+  border: 2px solid var(--purple);
+}
+nav a[aria-current='page'] { background: var(--purple); color: var(--cream); }
+
+/* Panneau bleu à coins arrondis + pattern blanc à 4 % */
+.panel {
+  position: relative;
+  flex: 1;
+  background: var(--purple);
+  border-radius: 48px 48px 0 0;
+  padding: 48px 24px 64px;
+  overflow: hidden;
+}
+.panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('assets/pattern.svg') top center / 362px auto repeat;
+  opacity: 0.04;
+  pointer-events: none;
+}
+.panel > * { position: relative; }
+
+h1 {
+  font-weight: 800;
+  font-size: 32px;
+  color: var(--cream-title);
+  margin-bottom: 8px;
+}
+.lead { color: var(--cream); font-size: 16px; line-height: 1.5; margin-bottom: 32px; }
+
+h2 {
+  font-weight: 800;
+  font-size: 22px;
+  color: var(--cream-title);
+  margin: 40px 0 16px;
+}
+
+.card {
+  background: var(--cream-card);
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+.card h3 { font-weight: 800; font-size: 17px; margin-bottom: 8px; }
+.card p, .card li { font-size: 15px; line-height: 1.6; }
+.card p + p, .card p + ul, .card ul + p { margin-top: 8px; }
+.card ul { padding-left: 20px; }
+.card a { color: var(--purple); font-weight: 700; }
+
+/* Bouton orange de l'app (dégradé, bordure et ombre franche) */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 51px;
+  border-radius: 16px;
+  border: 2px solid var(--orange-border);
+  box-shadow: -1px 2px 0 var(--orange-border);
+  background: linear-gradient(90deg, var(--orange), var(--yellow));
+  color: var(--cream);
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 20px;
+  text-decoration: none;
+  margin-top: 16px;
+}
+.card a.btn { color: var(--cream); font-weight: 500; }
+.btn:active { transform: translate(-1px, 2px); box-shadow: none; }
+
+details.card { cursor: pointer; }
+details.card summary {
+  font-weight: 800;
+  font-size: 17px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+details.card summary::-webkit-details-marker { display: none; }
+details.card summary::after { content: '+'; color: var(--purple); font-size: 22px; line-height: 1; }
+details.card[open] summary::after { content: '–'; }
+details.card[open] summary { margin-bottom: 8px; }
+
+.updated { color: var(--cream); opacity: 0.8; font-size: 13px; margin-top: 40px; text-align: center; }
+
+a:focus-visible, summary:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
